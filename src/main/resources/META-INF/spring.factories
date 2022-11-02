@@ -1,0 +1,4 @@
+org.springframework.boot.env.EnvironmentPostProcessor=com.example.sboot.starter.profiles.CheckEnvPP
+org.springframework.context.ApplicationContextInitializer=com.example.sboot.starter.profiles.BadProfileInitializer
+org.springframework.boot.diagnostics.FailureAnalyzer=com.example.sboot.starter.profiles.ProfileNeededFailureAnalyzer
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.example.sboot.starter.profiles.NotificationAutoConfig

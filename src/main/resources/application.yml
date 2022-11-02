@@ -1,0 +1,6 @@
+prod:
+  mails:
+    - one@mail.ru
+    - two@mail.ru
+    - three@mail.ru
+  can-notify: true
