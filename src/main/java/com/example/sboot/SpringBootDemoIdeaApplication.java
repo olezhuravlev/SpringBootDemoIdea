@@ -34,6 +34,7 @@ public class SpringBootDemoIdeaApplication implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 //        userRepository.save(new User("user@gmail.com", "User_First", "User_Last", "pwd", Set.of(Role.ROLE_USER)));
 //        userRepository.save(new User("admin@mail.ru", "Admin_First", "Admin_Last", "pwd", Set.of(Role.ROLE_USER, Role.ROLE_ADMIN)));
-        System.out.println(userRepository.findAll());
+//        System.out.println(userRepository.findAll());
+        System.out.println(userRepository.findByLastNameContainingIgnoreCase("last"));
     }
 }
