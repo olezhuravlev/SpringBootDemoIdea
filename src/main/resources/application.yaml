@@ -31,3 +31,15 @@ spring:
   h2:
     console:
       enabled: true
+  data:
+    rest:
+      return-body-on-create: true
+      base-path: /api
+
+  # Jackson Serialization Issue Resolver
+#  jackson:
+#    visibility:
+#      field: any
+#      getter: none
+#      setter: none
+#      is-getter: none
