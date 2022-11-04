@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -47,7 +48,9 @@ public class WebSecurityConfig {
         httpSecurity.authorizeRequests()
                 .antMatchers("/api/account").hasRole(Role.USER.name())
                 .antMatchers("/api/**").hasRole(Role.ADMIN.name())
-                .and().formLogin();
+                .and().httpBasic()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().csrf().disable();
 
         return httpSecurity.build();
     }
