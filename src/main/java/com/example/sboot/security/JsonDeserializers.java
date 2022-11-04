@@ -18,7 +18,6 @@ public class JsonDeserializers {
         @Autowired
         PasswordEncoder passwordEncoder;
 
-        // curl -X POST -H "Content-Type: application/json" --user admin@gmail.com:admin -d '{"email":"test2@test.com","firstName":"Test","lastName":"Test","password":"test","roles":["USER","ADMIN"]}' http://localhost:8080/api/users
         @Override
         public String deserialize(JsonParser parser, DeserializationContext context) throws IOException, JacksonException {
             ObjectCodec objectCodec = parser.getCodec();
