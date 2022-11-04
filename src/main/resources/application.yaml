@@ -35,11 +35,11 @@ spring:
     rest:
       return-body-on-create: true
       base-path: /api
-  security:
-    user:
-      name: user
-      password: user
-      roles: USER
+#  security:
+#    user:
+#      name: user
+#      password: user
+#      roles: USER
 logging:
   level:
     root: WARN
