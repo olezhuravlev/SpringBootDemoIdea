@@ -35,6 +35,16 @@ spring:
     rest:
       return-body-on-create: true
       base-path: /api
+  security:
+    user:
+      name: user
+      password: user
+      roles: USER
+logging:
+  level:
+    root: WARN
+    com.example.sboot.*: TRACE
+    org.springframework.security.web.FilterChainProxy: DEBUG
 
   # Jackson Serialization Issue Resolver
 #  jackson:
