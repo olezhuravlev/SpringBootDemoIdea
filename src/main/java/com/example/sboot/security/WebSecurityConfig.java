@@ -1,5 +1,6 @@
 package com.example.sboot.security;
 
+import com.example.sboot.model.Role;
 import com.example.sboot.model.User;
 import com.example.sboot.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -42,9 +43,12 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .authorizeRequests((authorizeRequests) -> authorizeRequests.anyRequest().authenticated())
-                .formLogin();
+
+        httpSecurity.authorizeRequests()
+                .antMatchers("/api/account").hasRole(Role.USER.name())
+                .antMatchers("/api/**").hasRole(Role.ADMIN.name())
+                .and().formLogin();
+
         return httpSecurity.build();
     }
 }

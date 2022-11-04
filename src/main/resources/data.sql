@@ -3,6 +3,6 @@ VALUES ('user@gmail.com', 'User_First', 'User_Last', '{noop}user'),
        ('admin@gmail.com', 'Admin_First', 'Admin_Last', '{noop}admin');
 
 INSERT INTO USER_ROLE(USER_ID, ROLE)
-VALUES (1, 'ROLE_USER'),
-       (2, 'ROLE_ADMIN'),
-       (2, 'ROLE_USER');
+VALUES (1, 'USER'),
+       (2, 'ADMIN'),
+       (2, 'USER');
