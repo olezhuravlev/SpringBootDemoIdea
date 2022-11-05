@@ -2,7 +2,9 @@ package com.example.sboot.utils;
 
 import com.example.sboot.errors.IllegalRequestDataException;
 import com.example.sboot.model.BaseEntity;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class ValidationUtils {
 
     public static void checkNew(BaseEntity entity) {

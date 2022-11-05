@@ -5,6 +5,7 @@ import com.example.sboot.model.User;
 import com.example.sboot.repository.UserRepository;
 import com.example.sboot.security.AuthUser;
 import com.example.sboot.utils.ValidationUtils;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -25,7 +26,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Set;
+import java.util.EnumSet;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
@@ -33,6 +34,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 @RequestMapping("/api/account")
 @AllArgsConstructor
 @Slf4j
+@Tag(name = "AccountController", description = "API controller")
 public class AccountController implements RepresentationModelProcessor<RepositoryLinksResource> {
 
     private final UserRepository userRepository;
@@ -65,7 +67,7 @@ public class AccountController implements RepresentationModelProcessor<Repositor
         log.info("register {}", user);
 
         ValidationUtils.checkNew(user);
-        user.setRoles(Set.of(Role.USER));
+        user.setRoles(EnumSet.of(Role.USER));
         user = userRepository.save(user);
 
         // It's a good practice to provide created entity URL in response header.

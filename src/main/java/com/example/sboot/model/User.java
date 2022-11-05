@@ -1,6 +1,6 @@
 package com.example.sboot.model;
 
-import com.example.sboot.security.JsonDeserializers;
+import com.example.sboot.utils.JsonDeserializers;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;

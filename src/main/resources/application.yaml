@@ -1,3 +1,13 @@
+application:
+  title: "REST API documentation"
+  version: "0.0.1"
+  description: "Приложение по <a href='https://javaops.ru/view/bootjava'>курсу BootJava</a>"
+  author:
+    contact:
+      url: "https://javaops.ru/#contacts"
+      name: "Grigory Kislin"
+      email: "admin@javaops.ru"
+
 spring:
   profiles:
     include: 'notification'
@@ -5,7 +15,7 @@ spring:
     show-sql: true
     open-in-view: false
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
