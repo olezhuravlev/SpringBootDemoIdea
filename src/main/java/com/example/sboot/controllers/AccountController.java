@@ -31,11 +31,13 @@ import java.util.EnumSet;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping(AccountController.URL)
 @AllArgsConstructor
 @Slf4j
 @Tag(name = "AccountController", description = "API controller")
 public class AccountController implements RepresentationModelProcessor<RepositoryLinksResource> {
+
+    public static final String URL = "/api/account";
 
     private final UserRepository userRepository;
 
