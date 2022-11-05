@@ -14,15 +14,6 @@ spring:
     defer-datasource-initialization: true
   datasource:
     url: jdbc:h2:mem:voting
-    #    tcp: jdbc:h2:tcp://localhost:9092/mem:voting
-    # Absolute path
-    #    url: jdbc:h2:C:/projects/bootjava/restorant-voting/db/voting
-    #    tcp: jdbc:h2:tcp://localhost:9092/C:/projects/bootjava/restorant-voting/db/voting
-    # Relative path form current dir
-    #    url: jdbc:h2:./db/voting
-    # Relative path from home
-    #    url: jdbc:h2:~/voting
-    #    tcp: jdbc:h2:tcp://localhost:9092/~/voting9
     username: sa
     password:
   sql:
@@ -35,6 +26,8 @@ spring:
     rest:
       return-body-on-create: true
       base-path: /api
+      default-page-size: 5
+
 #  security:
 #    user:
 #      name: user
@@ -53,3 +46,9 @@ logging:
 #      getter: none
 #      setter: none
 #      is-getter: none
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
