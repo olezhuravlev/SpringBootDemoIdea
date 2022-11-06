@@ -8,6 +8,8 @@ import com.example.sboot.utils.ValidationUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.RepositoryLinksResource;
@@ -55,6 +57,7 @@ public class AccountController implements RepresentationModelProcessor<Repositor
         return ASSEMBLER.toModel(authUser.getUser());
     }
 
+    @CacheEvict(value = "users", key = "#authUser.username")
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@AuthenticationPrincipal AuthUser authUser) {
@@ -80,9 +83,10 @@ public class AccountController implements RepresentationModelProcessor<Repositor
         return ResponseEntity.created(uriOfNewResource).body(ASSEMBLER.toModel(user));
     }
 
+    @CachePut(value = "users", key = "#authUser.username")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@Valid @RequestBody User user, @AuthenticationPrincipal AuthUser authUser) {
+    public User update(@Valid @RequestBody User user, @AuthenticationPrincipal AuthUser authUser) {
 
         log.info("update {} to {}", authUser, user);
 
@@ -94,7 +98,7 @@ public class AccountController implements RepresentationModelProcessor<Repositor
         if (user.getPassword() == null) {
             user.setPassword(oldUser.getPassword());
         }
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
