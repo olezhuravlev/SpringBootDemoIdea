@@ -76,4 +76,40 @@ public class AccountControllerTest extends AbstractControllerTest {
 
         UserTestUtils.assertEquals(updatedUser, userRepository.findById(USER_ID).orElseThrow());
     }
+
+    @Test
+    @WithUserDetails(value = USER_MAIL)
+    void updateHtmlUnsafeFirstName() throws Exception {
+        User updated = UserTestUtils.getUpdated();
+        updated.setFirstName("<script>alert()</script>");
+        perform(MockMvcRequestBuilders.put(URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(writeValue(updated)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    @WithUserDetails(value = USER_MAIL)
+    void updateHtmlUnsafeLastName() throws Exception {
+        User updated = UserTestUtils.getUpdated();
+        updated.setLastName("<script>alert()</script>");
+        perform(MockMvcRequestBuilders.put(URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(writeValue(updated)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    @WithUserDetails(value = USER_MAIL)
+    void updateHtmlUnsafeEmail() throws Exception {
+        User updated = UserTestUtils.getUpdated();
+        updated.setEmail("<script>alert()</script>");
+        perform(MockMvcRequestBuilders.put(URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(writeValue(updated)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
 }

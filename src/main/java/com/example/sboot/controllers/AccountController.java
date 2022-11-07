@@ -5,6 +5,7 @@ import com.example.sboot.model.User;
 import com.example.sboot.repository.UserRepository;
 import com.example.sboot.security.AuthUser;
 import com.example.sboot.utils.ValidationUtils;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,12 +52,14 @@ public class AccountController implements RepresentationModelProcessor<Repositor
                 }
             };
 
+    @Operation(summary = "Get current user info")
     @GetMapping(produces = MediaTypes.HAL_JSON_VALUE)
     public EntityModel<User> get(@AuthenticationPrincipal AuthUser authUser) {
         log.info("get {}", authUser);
         return ASSEMBLER.toModel(authUser.getUser());
     }
 
+    @Operation(summary = "Delete current user")
     @CacheEvict(value = "users", key = "#authUser.username")
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -65,6 +68,7 @@ public class AccountController implements RepresentationModelProcessor<Repositor
         userRepository.deleteById(authUser.id());
     }
 
+    @Operation(summary = "Add brand new user")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
     public ResponseEntity<EntityModel<User>> register(@Valid @RequestBody User user) {
@@ -83,6 +87,7 @@ public class AccountController implements RepresentationModelProcessor<Repositor
         return ResponseEntity.created(uriOfNewResource).body(ASSEMBLER.toModel(user));
     }
 
+    @Operation(summary = "Update current user info")
     @CachePut(value = "users", key = "#authUser.username")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
