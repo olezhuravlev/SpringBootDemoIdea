@@ -14,6 +14,7 @@ import java.sql.SQLException;
 public class AppConfig {
 
     /*
+    @Profile("!test")
     @Bean(initMethod = "start", destroyMethod = "stop")
     public Server h2WebServer() throws SQLException {
         log.info("Start H2 TCP server");
@@ -21,8 +22,10 @@ public class AppConfig {
     }
     */
 
+    // To have ability to connect to H2 from outside by URL
+    // jdbc:h2:tcp://localhost:9092/mem:voting
     @Bean(initMethod = "start", destroyMethod = "stop")
-    public Server h2Server() throws SQLException {
+    Server h2Server() throws SQLException {
         log.info("Start H2 TCP server");
         return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9092");
     }

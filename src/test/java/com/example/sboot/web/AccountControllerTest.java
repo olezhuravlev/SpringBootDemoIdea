@@ -56,19 +56,12 @@ public class AccountControllerTest extends AbstractControllerTest {
     void register() throws Exception {
         User newUser = UserTestUtils.getNew();
         User registeredUser = asUser(perform(MockMvcRequestBuilders
-                .post(URL + "/register")
+                .post(URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(writeValue(newUser)))
                 .andExpect(status().isCreated()).andReturn());
 
         UserTestUtils.assertNoIdEquals(registeredUser, newUser);
-
-        // HATEOAS doesn't return id!
-        registeredUser.setId(3);
-
-        int newId = registeredUser.id();
-        newUser.setId(newId);
-        UserTestUtils.assertEquals(registeredUser, userRepository.findById(newId).orElseThrow());
     }
 
     @Test

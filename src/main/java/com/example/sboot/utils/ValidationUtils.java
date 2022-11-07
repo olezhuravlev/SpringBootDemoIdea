@@ -3,6 +3,8 @@ package com.example.sboot.utils;
 import com.example.sboot.errors.IllegalRequestDataException;
 import com.example.sboot.model.BaseEntity;
 import lombok.experimental.UtilityClass;
+import org.springframework.core.NestedExceptionUtils;
+import org.springframework.lang.NonNull;
 
 @UtilityClass
 public class ValidationUtils {
@@ -20,5 +22,11 @@ public class ValidationUtils {
         } else if (entity.id() != id) {
             throw new IllegalRequestDataException(entity.getClass().getSimpleName() + " must has id=" + id);
         }
+    }
+
+    @NonNull
+    public static Throwable getRootCause(@NonNull Throwable t) {
+        Throwable rootCause = NestedExceptionUtils.getRootCause(t);
+        return rootCause != null ? rootCause : t;
     }
 }

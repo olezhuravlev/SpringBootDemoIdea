@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.5</version> <!--In tutorial version 2.4.4!-->
+        <version>2.7.5</version> <!--In tutorial version 2.6.7!-->
         <relativePath/>
     </parent>
     <groupId>com.example</groupId>
@@ -19,6 +19,8 @@
         <java.version>11</java.version>
         <jcommon.version>1.0.24</jcommon.version>
         <springdoc.version>1.6.12</springdoc.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
     <dependencies>
         <dependency>
@@ -105,6 +107,11 @@
             <artifactId>jcommon</artifactId>
             <version>${jcommon.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -140,6 +147,13 @@
 <!--                    <outputDir>${project.build.directory}</outputDir>-->
 <!--                </configuration>-->
 <!--            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
